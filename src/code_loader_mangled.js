@@ -210,23 +210,24 @@ const configuration={
   p,
   _m,
   q,
+  _n,
   r,
   s,
-  _n,
+  _o,
   t,
   u,
   v,
-  _o,
-  _p=H+" OM: ",
+  _p,
+  _q=H+" OM: ",
   _=-2,
   w=!0,
   x=-1,
   y=!1,
   z,
-  _q,
   _r,
   _s,
-  _t;
+  _t,
+  _u;
 
   const $=(A,B)=>{
     let C=_J[B];
@@ -261,19 +262,20 @@ const configuration={
     m[0]=null;
     _m=0;
     q=0;
+    _n=l.length;
     if(n){
       r=!1;
       s={};
-      _n=1;
+      _o=1;
       t=0;
       u=0
     }
     z=(D.boot_delay_ms|0)*.02|0;
     z=z&~(z>>31);
-    _q=!!D.show_boot_logs;
-    _r=!!D.show_error_logs;
-    _s=!!D.show_execution_logs;
-    _t=-1
+    _r=!!D.show_boot_logs;
+    _s=!!D.show_error_logs;
+    _t=!!D.show_execution_logs;
+    _u=-1
   },
   $B=()=>{
     B.state=0;
@@ -755,23 +757,22 @@ const configuration={
   },
   $S=()=>{
     let A=o,
-    B=l.length,
-    C,E,F,G,H;
-    while(q<B){
-      C=l[q];
-      if(!C||C.length<3){
+    B,C,E,F,G;
+    while(q<_n){
+      B=l[q];
+      if(!B||B.length<3){
         D.pointer=++q;
         continue
       }
-      E=C[0];
-      F=C[1];
-      G=C[2];
-      if((C[3]=_B(E,F,G))==="Unloaded"){return !1}
+      C=B[0];
+      E=B[1];
+      F=B[2];
+      if((B[3]=_B(C,E,F))==="Unloaded"){return !1}
       try{
-        H=_D(E,F,G)?.persisted?.shared?.text;
-        _A(H)
+        G=_D(C,E,F)?.persisted?.shared?.text;
+        _A(G)
       }catch(I){
-        m[++_m*+(m.length-1<p)]=[I.name,I.message,E,F,G]
+        m[++_m*+(m.length-1<p)]=[I.name,I.message,C,E,F]
       }
       D.pointer=++q;
       A--;
@@ -790,7 +791,7 @@ const configuration={
     }
     let B=o,
     C,F,G,H,I,J,K,L,M,N,O;
-    while(C=v[_n]){
+    while(C=v[_o]){
       F=C.attributes.customAttributes._;
       G=F.length-2;
       while(t<G){
@@ -803,12 +804,12 @@ const configuration={
           s[K]=!0
         }
         if(u===0){
-          _o=_E([H,I,J])
+          _p=_E([H,I,J])
         }
         while(u<4){
           L="";M=u*9;
           N=0;
-          while(N<9&&(O=_o[M+N])){
+          while(N<9&&(O=_p[M+N])){
             L+=O.attributes.customAttributes._;
             N++
           }
@@ -830,7 +831,7 @@ const configuration={
         t+=3
       }
       t=0;
-      _n++
+      _o++
     }
     return !0
   },
@@ -841,17 +842,17 @@ const configuration={
     m[0]=null;
     s=null;
     v=null;
-    _o=null
+    _p=null
   },
   $W=A=>{
-    let B="Code was loaded in "+_t*50+" ms",
+    let B="Code was loaded in "+_u*50+" ms",
     C=m.length-1;
     if(A){
       B+=C>0?" with "+C+" error"+(C===1?"":"s")+".":" with 0 errors."
     }else{
       B+="."
     }
-    $(_p+B,1+(C<=0))
+    $(_q+B,1+(C<=0))
   },
   $X=A=>{
     let B=m.length-1;
@@ -965,8 +966,8 @@ const configuration={
       D.isPrimaryBoot=w=!1;
       D.isRunning=y=!1;
       _=-1;
-      _t=x-z+1;
-      $Z(_q,_r,_s)
+      _u=x-z+1;
+      $Z(_r,_s,_t)
     }
   };
   B.tick = $B;
@@ -1009,7 +1010,7 @@ const configuration={
       c=$a;
       _=0
     }else{
-      $(_p+"Reboot request was denied.",1)
+      $(_q+"Reboot request was denied.",1)
     }
   };
   D.bootLogs=(A=!0)=>{
@@ -1126,4 +1127,4 @@ _OM_bootDelayTicks
 _log
 */
 
-// 01/02/2026
+// 08/02/2026

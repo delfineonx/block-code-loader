@@ -204,12 +204,13 @@ const configuration={
   _BM_prefix=_PREFIX+" BM: ",
   _BM_executor,
   _BM_blocks,
-  _BM_errors=[],
+  _BM_errors=[null],
   _BM_isChestMode,
   _BM_maxExecutionsPerTick,
   _BM_maxErrorsCount,
   _BM_errorIndex,
   _BM_blockIndex,
+  _BM_blocksCount,
   _BM_isRegistryLoaded,
   _BM_isChunkLoaded,
   _BM_registrySlotIndex,
@@ -261,6 +262,7 @@ const configuration={
     _BM_errors[0]=null;
     _BM_errorIndex=0;
     _BM_blockIndex=0;
+    _BM_blocksCount=_BM_blocks.length;
     if(_BM_isChestMode){
       _BM_isRegistryLoaded=!1;
       _BM_isChunkLoaded={};
@@ -755,9 +757,8 @@ const configuration={
   },
   _BM_blockExecutor=()=>{
     let budget=_BM_maxExecutionsPerTick,
-    blocksCount=_BM_blocks.length,
     block,bx,by,bz,code;
-    while(_BM_blockIndex<blocksCount){
+    while(_BM_blockIndex<_BM_blocksCount){
       block=_BM_blocks[_BM_blockIndex];
       if(!block||block.length<3){
         _CL.pointer=++_BM_blockIndex;
@@ -1069,4 +1070,4 @@ const configuration={
   void 0
 }
 
-// 01/02/2026
+// 08/02/2026

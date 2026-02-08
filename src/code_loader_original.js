@@ -232,12 +232,13 @@ const configuration = {
   const _BM_prefix = _PREFIX + " BM: ";
   let _BM_executor;
   let _BM_blocks; // [[x, y, z, blockName], ...]
-  const _BM_errors = []; // [[name, message, x, y, z, partition?], ...]
+  const _BM_errors = [null]; // [[name, message, x, y, z, partition?], ...]
   let _BM_isChestMode;
   let _BM_maxExecutionsPerTick;
   let _BM_maxErrorsCount;
   let _BM_errorIndex;
   let _BM_blockIndex;
+  let _BM_blocksCount;
   let _BM_isRegistryLoaded;
   let _BM_isChunkLoaded; // "cx|cy|cz" -> true
   let _BM_registrySlotIndex;
@@ -299,6 +300,7 @@ const configuration = {
     _BM_errors[0] = null;
     _BM_errorIndex = 0;
     _BM_blockIndex = 0;
+    _BM_blocksCount = _BM_blocks.length;
     if (_BM_isChestMode) {
       _BM_isRegistryLoaded = false;
       _BM_isChunkLoaded = {};
@@ -865,9 +867,8 @@ const configuration = {
     /* ---------------- Block Manager ---------------- */
   const _BM_blockExecutor = () => {
     let budget = _BM_maxExecutionsPerTick;
-    const blocksCount = _BM_blocks.length;
     let block, bx, by, bz, code;
-    while (_BM_blockIndex < blocksCount) {
+    while (_BM_blockIndex < _BM_blocksCount) {
       block = _BM_blocks[_BM_blockIndex];
       if (!block || block.length < 3) {
         _CL.pointer = ++_BM_blockIndex;
@@ -1094,7 +1095,7 @@ const configuration = {
     }
 
     if (_OM_phase === 3 && _BM_executor()) {
-      _BM_finalize()
+      _BM_finalize();
       _OM_phase = 4 + !_EM_join_handler;
     }
 
@@ -1242,4 +1243,4 @@ const configuration = {
   void 0;
 }
 
-// 01/02/2026
+// 08/02/2026
